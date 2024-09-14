@@ -1,3 +1,5 @@
+export PATH="$PATH:/opt/homebrew/bin"
+
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.toml)"
 
 export DENO_INSTALL="$HOME/.deno"
@@ -7,7 +9,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-export PATH="$PATH:/opt/homebrew/bin"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -52,7 +53,7 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-bindkey -s ^d "~/src/scripts/tmux-sessionizer\n"
+bindkey -s ^d "~/dev/utils/scripts/tmux-sessionizer\n"
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
@@ -82,6 +83,6 @@ alias ls='ls --color'
 
 
 #shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(zoxide init zsh --cmd cd)"
 
