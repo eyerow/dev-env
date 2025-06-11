@@ -53,7 +53,7 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-bindkey -s ^d "~/dev/utils/scripts/tmux-sessionizer\n"
+bindkey -s ^d "~/.local/scripts/tmux-sessionizer\n"
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
@@ -86,3 +86,4 @@ alias ls='ls --color'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh --cmd cd)"
 
+. "/Users/seanladrigan/.deno/env"

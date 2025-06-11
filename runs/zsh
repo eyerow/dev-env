@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+chsh -s $(which zsh)
+
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
