@@ -54,6 +54,7 @@ autoload -U compinit && compinit
 zinit cdreplay -q
 
 bindkey -s ^d "~/.local/scripts/tmux-sessionizer\n"
+bindkey -s ^a "~/.local/scripts/new-note\n"
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward

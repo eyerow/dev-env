@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+read -rp "Enter note name: " name
+
+# Exit if name is empty
+if [[ -z "$name" ]]; then
+  echo "No name provided. Aborting."
+  exit 1
+fi
+
+# Replace spaces with dashes, lowercase, and add .md extension
+filename="$(echo "$name" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+filepath="$HOME/life/${filename}.md"
+
+# Create file only if it doesn't already exist
+if [[ -e "$filepath" ]]; then
+  echo "File already exists: $filepath"
+  exit 1
+fi
+
+# Create the file with a heading
+{
+  echo "# $name"
+  echo
+  echo "_Created on $(date)_" 
+} > "$filepath"
+
+# Open it in your preferred editor
+nvim "$filepath"
+

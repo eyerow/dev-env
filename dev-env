@@ -1,51 +1,69 @@
 #!/usr/bin/env bash
 
-script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 dry="0"
 
-while [[ $# > 0 ]]; do
-	if [[ $1 == '--dry' ]]; then
-		dry="1"
-	fi
-	shift
+while [[ $# -gt 0 ]]; do
+    if [[ $1 == '--dry' ]]; then
+        dry="1"
+    fi
+    shift
 done
 
-log(){
-	if [[ $dry == "1" ]]; then
-		echo "[DRY_RUN]: $@"
-	else
-		echo "$@"
-	fi
+log() {
+    if [[ $dry == "1" ]]; then
+        echo "[DRY_RUN]: $*"
+    else
+        echo "$*"
+    fi
 }
 
-
 execute() {
-	log "execute $@"
-	if [[ $dry == "1" ]]; then
-		return 
-	fi
-	"$@"
+    log "execute $*"
+    if [[ $dry == "0" ]]; then
+        "$@"
+    fi
 }
 
 log "----------- dev-env -----------"
 
-copy_dir(){
-	from=$1
-	to=$2
+update_files() {
+    local src="$1"
+    local dst="$2"
 
-	pushd $from > /dev/null
-	
-	dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
+    log "copying over files from: $src"
+    pushd "$src" > /dev/null || return
 
-	for dir in $dirs; do
-		execute rm -rf $to/$dir
-		execute cp -r $dir $to/$dir
+    for entry in *; do
+        [[ -e "$entry" ]] || continue  # skip if no files
+        dest_path="${dst%/}/$entry"
 
-	done
+        log "    removing: rm -rf $dest_path"
+        if [[ $dry == "0" ]]; then
+            rm -rf "$dest_path"
+        fi
 
-	popd > /dev/null
+        log "    copying: $entry -> $dst"
+        if [[ $dry == "0" ]]; then
+            cp -r "$entry" "$dst"
+        fi
+    done
 
+    popd > /dev/null || return
 }
 
-copy_dir ./env/.config $HOME/.config
+copy() {
+    log "removing: $2"
+    if [[ $dry == "0" ]]; then
+        rm -f "$2"
+    fi
+    log "copying: $1 to $2"
+    if [[ $dry == "0" ]]; then
+        cp "$1" "$2"
+    fi
+}
 
+update_files "$script_dir/env/.config" "$HOME/.config"
+update_files "$script_dir/env/.local/scripts" "$HOME/.local/scripts"
+copy "$script_dir/env/.tmux.conf" "$HOME/.tmux.conf"
+copy "$script_dir/env/.zshrc" "$HOME/.zshrc"
