@@ -87,4 +87,4 @@ alias ls='ls --color'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh --cmd cd)"
 
-. "/Users/seanladrigan/.deno/env"
+. "$HOME/.deno/env"
