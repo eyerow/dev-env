@@ -10,7 +10,7 @@ fi
 
 # Replace spaces with dashes, lowercase, and add .md extension
 filename="$(echo "$name" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
-filepath="$HOME/life/${filename}.md"
+filepath="$HOME/notes/${filename}.md"
 
 # Create file only if it doesn't already exist
 if [[ -e "$filepath" ]]; then

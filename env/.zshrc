@@ -1,6 +1,5 @@
 export PATH="$PATH:/opt/homebrew/bin"
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.toml)"
 
 export DENO_INSTALL="$HOME/.deno"
 
@@ -85,6 +84,7 @@ alias ls='ls --color'
 
 #shell integrations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(zoxide init zsh --cmd cd)"
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.json)"
 
 . "$HOME/.deno/env"

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "secondary_prompt": {
+    "template": "❯❯ ",
+    "foreground": "magenta",
+    "background": "transparent"
+  },
+  "transient_prompt": {
+    "template": "❯ ",
+    "background": "transparent",
+    "foreground_templates": [
+      "{{if gt .Code 0}}red{{end}}",
+      "{{if eq .Code 0}}magenta{{end}}"
+    ]
+  },
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "palette": {
+    "pine": "#013220",
+    "fir": "#014421",
+    "evergreen": "#00563B",
+    "midnight": "#191970",
+    "deep_sky": "#003366",
+    "steel": "#4682B4",
+    "slate": "#708090",
+    "ash": "#B0C4DE",
+    "snow": "#E0E5E5"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "style": "full"
+          },
+          "style": "powerline",
+          "template": "{{ .Path }}",
+          "foreground": "p:snow",
+          "background": "p:evergreen",
+          "type": "path"
+        },
+        {
+          "properties": {
+            "branch_icon": "",
+            "commit_icon": "@",
+            "fetch_status": true
+          },
+          "style": "powerline",
+          "template": " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}\u21e3{{ end }}{{ if gt .Ahead 0 }}\u21e1{{ end }}</>",
+          "foreground": "p:snow",
+          "background": "p:deep_sky",
+          "type": "git"
+        }
+      ],
+      "newline": true
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "react",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:steel",
+          "background": "transparent",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "npm",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:snow",
+          "background": "p:evergreen",
+          "template": " {{ .Full }} "
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "overflow": "hidden",
+      "segments": [
+        {
+          "properties": {
+            "threshold": 5000
+          },
+          "style": "plain",
+          "template": "{{ .FormattedMs }}",
+          "foreground": "p:steel",
+          "background": "transparent",
+          "type": "executiontime"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "style": "plain",
+          "template": "❯",
+          "background": "transparent",
+          "type": "text",
+          "foreground_templates": [
+            "{{if gt .Code 0}}red{{end}}",
+            "{{if eq .Code 0}}magenta{{end}}"
+          ]
+        }
+      ],
+      "newline": true
+    }
+  ],
+  "version": 3,
+  "final_space": true
+}
