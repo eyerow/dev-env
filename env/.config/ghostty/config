@@ -1,5 +1,6 @@
 mouse-hide-while-typing = true
 scrollback-limit = 1000000
+font-size = 18
 
 keybind = ctrl+h=goto_split:left
 keybind = ctrl+j=goto_split:bottom
