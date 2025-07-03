@@ -1,6 +1,5 @@
 export PATH="$PATH:/opt/homebrew/bin"
 
-
 export DENO_INSTALL="$HOME/.deno"
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -53,7 +52,6 @@ autoload -U compinit && compinit
 zinit cdreplay -q
 
 bindkey -s ^d "~/.local/scripts/tmux-sessionizer\n"
-bindkey -s ^a "~/.local/scripts/new-note\n"
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
@@ -80,7 +78,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color ${realpath}'
 
 #aliases
 alias ls='ls --color'
-
+alias reload="source ~/.zshrc"
 
 #shell integrations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
