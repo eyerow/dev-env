@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# --- CONFIG ---
+# Folder where you keep your projects
+PROJECTS_DIR="$HOME/src"
+
+# Folder where you keep your Zellij layouts (.kdl)
+LAYOUTS_DIR="$HOME/.config/zellij/layouts"
+
+# --- Pick Project ---
+PROJECT=$(find "$PROJECTS_DIR" -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select project: ")
+
+if [ -z "$PROJECT" ]; then
+  echo "No project selected. Exiting."
+  exit 1
+fi
+
+# --- Pick Layout ---
+# Pick layout with explicit [NONE] option
+LAYOUT=$( (echo "[NONE]"; find "$LAYOUTS_DIR" -type f -name "*.kdl" | xargs -n 1 basename) \
+  | fzf --prompt="Select layout: ")
+
+if [ "$LAYOUT" = "[NONE]" ] || [ -z "$LAYOUT" ]; then
+  echo "⚙️  No layout selected, picking dynamic default for macOS."
+
+  CONNECTED_SCREENS=$(system_profiler SPDisplaysDataType | grep -B 2 "Resolution" | grep "Display Type" | awk -F: '{print $2}' | tr -d ' ' | sort | uniq)
+
+  echo "🖥️  Connected screens: $CONNECTED_SCREENS"
+ 
+  if echo "$CONNECTED_SCREENS" | grep -qi "Built-in"; then
+    LAYOUT="default-laptop.kdl"
+    echo "💻 Using default layout: $LAYOUT"
+  else
+    LAYOUT="default-uw.kdl"
+    echo "🖥️  Using default layout: $LAYOUT"
+  fi
+fi
+
+# Remove .kdl extension
+LAYOUT_NAME="${LAYOUT%.kdl}"
+echo "layout:'${LAYOUT_NAME}"
+# --- Open New Tab ---
+TAB_NAME=$(basename "$PROJECT")
+
+# --- Open New Tab ---
+zellij action new-tab \
+  --layout "$LAYOUTS_DIR/$LAYOUT_NAME.kdl" \
+  --cwd "$PROJECT" \
+  --name="$TAB_NAME"
