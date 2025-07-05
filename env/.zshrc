@@ -13,19 +13,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 autoload -U add-zsh-hook
 
-
-pickdir() {
-  local dir
-  dir=$(find ~/src -mindepth 1 -maxdepth 1 -type d | fzf --preview 'tree -L 1 {}')
-
-  if [[ -z "$dir" ]]; then
-    echo "No directory selected."
-    return 1
-  fi
-
-  cd "$dir"
-}
-
 load-nvmrc() {
   local nvmrc_path
   nvmrc_path="$(nvm_find_nvmrc)"
@@ -63,7 +50,7 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-bindkey -s ^d "pickdir\n"
+bindkey -s ^d "~/.local/scripts/zellij-fzf\n"
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward

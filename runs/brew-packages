@@ -3,4 +3,4 @@
 brew install ripgrep
 brew install fzf
 brew install zoxide
-brew install jandedobbeleer/oh-my-posh/oh-my-posh
+brew install --cask ghostty
