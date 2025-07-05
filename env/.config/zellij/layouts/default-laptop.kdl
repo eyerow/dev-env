@@ -8,10 +8,10 @@ layout {
             pane size="80%" {
             command "nvim"
             }
-            pane size="20%"
+            
         }
         floating_panes {
-            pane cwd="~/src/scratchpad"{
+            pane {
                 width "50%"
                 height "50%"
             }
