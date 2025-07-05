@@ -31,15 +31,17 @@
       "alignment": "left",
       "segments": [
         {
-          "properties": {
-            "style": "full"
-          },
-          "style": "powerline",
-          "template": "{{ .Path }}",
+          "background": "p:slate",
           "foreground": "p:snow",
-          "background": "p:evergreen",
+          "leading_diamond": "\ue0b6",
+          "properties": {
+            "style": "folder"
+          },
+          "style": "plain",
+          "template": "\ue5ff {{ .Path }}",
           "type": "path"
         },
+
         {
           "properties": {
             "branch_icon": "",
@@ -52,13 +54,34 @@
           "background": "p:deep_sky",
           "type": "git"
         }
-      ],
-      "newline": true
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "foreground": "p:ash",
+          "properties": {
+            "time_format": "15:04:05"
+          },
+          "style": "plain",
+          "template": " {{ .CurrentDate | date .Format }} ",
+          "type": "time"
+        }
+      ]
     },
     {
       "type": "prompt",
       "alignment": "left",
       "segments": [
+        {
+          "type": "deno",
+          "style": "plain",
+          "foreground": "p:snow",
+          "background": "p:deep_sky",
+          "template": "  {{ .Full }} "
+        },
         {
           "type": "react",
           "style": "powerline",
