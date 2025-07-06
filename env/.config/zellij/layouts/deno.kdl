@@ -7,17 +7,16 @@ layout {
         command "nvim"
         }
         pane split_direction="horizontal" size="50%" {
-            pane
-            pane
-        }
-    }
-    floating_panes {
-        pane {
-            width "50%"
-            height "50%"
+            deno {args "init";}
+            deno {args "test";}
         }
     }
     pane size=1 borderless=true {
         plugin location="status-bar"
+    }
+
+    pane_template name="deno" {
+        command "deno"
+        start_suspended true
     }
 }

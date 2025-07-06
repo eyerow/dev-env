@@ -50,7 +50,7 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-bindkey -s ^d "~/.local/scripts/zellij-fzf\n"
+bindkey -s ^w "~/.local/scripts/zellij-fzf\n"
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
