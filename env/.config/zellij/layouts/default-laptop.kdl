@@ -1,26 +1,19 @@
 layout {
     tab hide_floating_panes=true {
-
         pane size=1 borderless=true {
             plugin location="tab-bar"
         }
         pane split_direction="vertical" {
-            pane size="80%" {
-            command "nvim"
-            }
-            
+            pane 
+        }
+        pane size=1 borderless=true {
+            plugin location="status-bar"
         }
         floating_panes {
             pane {
                 width "50%"
                 height "50%"
             }
-            pane size=1 borderless=true {
-                plugin location="zellij:compact-bar"
-            }
-        }
-        pane size=1 borderless=true {
-            plugin location="status-bar"
         }
     }
 }
